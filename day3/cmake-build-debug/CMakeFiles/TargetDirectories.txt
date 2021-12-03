@@ -1,3 +1,0 @@
-/home/lancelot/Documents/adventOfCode/day3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/lancelot/Documents/adventOfCode/day3/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/lancelot/Documents/adventOfCode/day3/cmake-build-debug/CMakeFiles/day3.dir
