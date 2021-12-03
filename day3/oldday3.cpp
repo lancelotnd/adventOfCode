@@ -21,7 +21,7 @@ int main(int argc, const char **argv)
 {
 
     static int diagnostics[] = {0, 0, 0, 0, 0};
-
+ 
     std::istream *entree;
     std::ifstream *entree_fichier = NULL;
 
@@ -37,7 +37,6 @@ int main(int argc, const char **argv)
     }
     while (*entree)
     {
-
         if (!(*entree))
         {
 
@@ -59,7 +58,6 @@ int main(int argc, const char **argv)
     string epsilon;
     for (int &i : diagnostics)
     {
-
         if (i > 0)
         {
             gamma += "1";
