@@ -17,18 +17,15 @@ def split(list_a, chunk_size):
         yield list_a[i:i + chunk_size]
 
 
-
-
-
 allNumbers = lines[0].split(',')
+allNumbers = [x.replace('\n', '') for x in allNumbers]
+allNumbers = [int(x) for x in allNumbers]
 
 lines.pop(0)
-
 nonEmpty = []
 for l in lines:
     if len(l) > 1:
         nonEmpty.append(l)
-
 master = []
 
 i = 0
@@ -60,36 +57,35 @@ for b in boards:
         b.append(l)
 
 
-
-allNumbers = [x.replace('\n', '') for x in allNumbers]
-allNumbers = [int(x) for x in allNumbers]
-
-
 draw = []
 draw.append(allNumbers.pop(0))
 draw.append(allNumbers.pop(0))
 draw.append(allNumbers.pop(0))
 draw.append(allNumbers.pop(0))
 draw.append(allNumbers.pop(0))
-
-
+allBoardsStatus = [False] * len(boards)
+print(allBoardsStatus)
 foundBingo = False
 while  foundBingo == False:
     draw.append(allNumbers.pop(0))
+    i = 0
     for b in boards:
         for r in b:
             foundBingo =  all(elem in draw  for elem in r)
             if(foundBingo):
-                totalSum = 0
-                for remain in b[0:5]:
-                    print(remain)
-                    for n in remain:
-                        if n not in draw:
-                            totalSum += n
-                print("Bingo at ",r, "with", draw)
-                print(totalSum)
-                print(draw[-1])
-                print("Answer ",totalSum * draw[-1])
-
-                exit()
+                allBoardsStatus[i] = True
+                if(all(allBoardsStatus)):
+                    totalSum = 0
+                    for remain in b[0:5]:
+                        print(remain)
+                        for n in remain:
+                            if n not in draw:
+                                totalSum += n
+                    print("Last board to win at ",r, "with", draw)
+                    print("Board no",i)
+                    print(totalSum)
+                    print(draw[-1])
+                    print("Answer ",totalSum * draw[-1])
+                    exit()
+        i+=1
 
