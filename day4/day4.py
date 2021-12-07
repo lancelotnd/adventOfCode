@@ -1,4 +1,4 @@
-with open('input.txt') as f:
+with open('testInput.txt') as f:
     lines = f.readlines()
 
 
@@ -7,7 +7,7 @@ def isWinning(board, allNumbers):
     i = 0
     while (i < 25):
          results = results or all(elem in allNumbers for elem in board[i:i+5])
-         
+
          i += 5
     return results
 
