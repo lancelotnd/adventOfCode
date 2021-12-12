@@ -1,22 +1,25 @@
-with open('test.txt') as f:
+with open('input.txt') as f:
     lines = f.readlines()
 
 
 def getConnexIndex(hsize,  index, array):
     toReturn = []
-    if (index % hsize) != 0: #W   
+    if (index % hsize) != 0: #W 
         toReturn.append(index-1)
     if (index - hsize) >= 0: #N
         if(index-hsize+1) % hsize != 0: #NE
             toReturn.append(index - hsize + 1)
-        if(index-hsize-1) % hsize >= 0 and (index-hsize-1) !=0: #NW
+        if(index-hsize) % hsize != 0 and (index-hsize-1) >=0: #NW
             toReturn.append(index-hsize - 1)
         toReturn.append(index-hsize)
+
     if (index + hsize) < len(array): #S
         toReturn.append(index + hzise)
         if ((index+hsize+1) < len(array)) and ((index+hsize+1) % hsize != 0): #SE
             toReturn.append(index+ hsize + 1)
-        if(index+hsize-1) % hsize >= 0: #SW
+        if(index+hsize) % hsize != 0 : #SW
+            #print(index+hsize -1)  
+
             toReturn.append(index+hsize-1)
     if (index + 1) % hsize != 0:
         toReturn.append(index + 1)
@@ -46,35 +49,21 @@ def printArray(array:list, hsize:int):
     j = 0
     for i in range(len(array)):
         if j == hsize:
-            print(*row)
+            answer =""
+            for n in row:
+                answer += str(n)
+            print(answer)
             j = 0 
             row = []
         row.append(array[i])
         j+=1
-    print(*row)
+    answer = ""
+    for n in row:
+        answer += str(n)
+    print(answer)
     return array
 
 
-
-def getConnex(hsize,  index, array):
-    toReturn = []
-    if (index % hsize) != 0: #W   
-        toReturn.append(array[index-1])
-    if (index - hsize) >= 0: #N
-        if(index-hsize+1) % hsize != 0: #NE
-            toReturn.append(array[index- hsize + 1])
-        if(index-hsize-1) % hsize !=0 and (index-hsize-1) !=0: #NW
-            toReturn.append(array[index-hsize-1])
-        toReturn.append(array[index-hsize])
-    if (index + hsize) < len(array): #S
-        toReturn.append(array[index + hzise])
-        if index+hsize+1 < len(array) and (index+hsize+1) % hsize != 0: #SE
-            toReturn.append(array[index+ hsize + 1])
-        if(index+hsize-1) % hsize !=0: #SW
-            toReturn.append(array[index+hsize-1])
-    if (index + 1) % hsize != 0:
-        toReturn.append(array[index + 1])
-    return toReturn
 
 
 def findBassine(initialIndex, hsize, array):
@@ -102,21 +91,25 @@ for n in m:
     for i in tmp:
         master.append(int(i))
 
-
+"""
 for i in range(len(master)):
-    print(i, getConnexIndex(hzise, i, master))
+    l =getConnexIndex(hzise, i, master)
+    l.sort()
+    print(i ,l)
 """
 
 totalFlashes = 0
-for i in range(11):
-    print("After step", f"{str(i)}:", totalFlashes)
-    printArray(master, hzise)
+i = 0
+while(len([x for x in master if x ==0]) != len(master)):
+    #print("After step", f"{str(i)}:", totalFlashes)
+    #printArray(master, hzise)
     master = stepOneIncrement(master)
     master = flashAndIncrementAdjacent(master, hzise)
     totalFlashes += len([x for x in master if x == 0])
-
-print("Answer, total number of flashes : ", totalFlashes)
+    # print()
+    i+=1
+print("Answer,", i, " total number of flashes : ", totalFlashes)
     
-"""
+
 
 
